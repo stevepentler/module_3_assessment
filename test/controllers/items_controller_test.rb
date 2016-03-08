@@ -23,4 +23,23 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal item2.name, items.last["name"]
     assert_equal item2.description, items.last["description"]
   end
+
+  test '#show' do 
+    item1 = Item.create(
+                       name: "banana",
+                       description: "yellow",
+                       created_at: "5AM",
+                       updated_at: "5PM"
+                       )
+
+    get :show, format: :json, id: item1.id
+
+    result = JSON.parse(response.body)
+
+    assert_response :success
+
+    assert_equal item1.id, result["id"]
+    assert_equal item1.name, result["name"]
+    assert_equal item1.description, result["description"]
+  end
 end

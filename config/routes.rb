@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users,  only: [:index, :show]
   namespace :api, defaults: {format: :json} do 
     namespace :v1 do 
+      get '/items/:id', to: "items#show"
       get '/items', to: "items#index"
     end
   end
