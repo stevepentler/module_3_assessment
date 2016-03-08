@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+gem 'figaro'
+gem 'faraday'
+gem 'responders'
+
 gem "rails", "4.1.4"
 gem "sqlite3"
 gem "sass-rails", "~> 4.0.3"
@@ -21,4 +25,12 @@ end
 group :development, :test do
   gem "minitest-rails-capybara"
   gem "pry", :require => "pry"
+  gem 'launchy'
+end
+
+group :test do 
+  gem 'vcr'
+  gem 'minitest-vcr'
+  gem 'webmock'
+  gem 'capybara'
 end

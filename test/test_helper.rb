@@ -1,11 +1,23 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'minitest/autorun'
+require 'capybara/rails'
+require 'vcr'
+require 'minitest-vcr'
+require 'webmock'
 require 'minitest/pride'
-require "minitest/rails/capybara"
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
+
+  VCR.configure do |config|
+    config.cassette_library_dir = 'test/cassettes'
+    config.hook_into :webmock
+    config.allow_http_connections_when_no_cassette = true
+  end
+  
+  MinitestVcr::Spec.configure!
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #
