@@ -19,6 +19,7 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
 
     assert_equal item1.name, items.first["name"]
     assert_equal item1.description, items.first["description"]
+
     assert_equal item2.name, items.last["name"]
     assert_equal item2.description, items.last["description"]
   end
