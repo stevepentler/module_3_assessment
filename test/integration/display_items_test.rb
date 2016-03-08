@@ -16,15 +16,17 @@ class DisplaysItemsTest < ActionDispatch::IntegrationTest
   end
 
   def test_searches_by_name
-    visit '/'
-    assert_equal 200, page.status_code
+    # VCR.use_cassette('search') do 
+      visit '/'
+      assert_equal 200, page.status_code
 
-    fill_in "name", with: "sennheiser"
-    click_on "Search"
+      fill_in "name", with: "Iphone"
+      click_on "Search"
 
-    assert_equal "/search", current_path
+      assert_equal "/search", current_path
 
-    assert page.has_content?("sennheiser")
+      assert page.has_content?("sennheiser")
+    # end
   end
 
 end
