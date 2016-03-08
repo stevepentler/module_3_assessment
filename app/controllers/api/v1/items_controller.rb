@@ -9,6 +9,10 @@ class Api::V1::ItemsController < ApplicationController
     respond_with item, select_attributes
   end
 
+  def destroy
+    respond_with Item.delete(params[:id])
+  end
+
   private
 
   def select_attributes

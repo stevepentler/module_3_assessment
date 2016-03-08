@@ -25,11 +25,10 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   end
 
   test '#show' do 
-    item1 = Item.create(
-                       name: "banana",
-                       description: "yellow",
-                       created_at: "5AM",
-                       updated_at: "5PM"
+    item1 = Item.create(name: "banana",
+                        description: "yellow",
+                        created_at: "5AM",
+                        updated_at: "5PM"
                        )
 
     get :show, format: :json, id: item1.id
@@ -41,5 +40,19 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal item1.id, result["id"]
     assert_equal item1.name, result["name"]
     assert_equal item1.description, result["description"]
+  end
+
+  test '#delete' do 
+    item1 = Item.create(name: "banana",
+                        description: "yellow",
+                        created_at: "5AM",
+                        updated_at: "5PM"
+                       )
+
+    patch :destroy, format: :json, id: item1.id
+
+    assert_response :success
+    assert_equal 204, response.status
+
   end
 end

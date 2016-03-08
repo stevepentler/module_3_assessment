@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do 
     namespace :v1 do 
       get '/items/:id', to: "items#show"
+      patch '/items/:id', to: "items#destroy"
       get '/items', to: "items#index"
     end
   end
