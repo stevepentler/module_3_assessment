@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users,  only: [:index, :show]
   namespace :api, defaults: {format: :json} do 
     namespace :v1 do 
+      post '/items/:id', to: "items#create"
       get '/items/:id', to: "items#show"
       patch '/items/:id', to: "items#destroy"
       get '/items', to: "items#index"

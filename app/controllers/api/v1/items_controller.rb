@@ -13,6 +13,11 @@ class Api::V1::ItemsController < ApplicationController
     respond_with Item.delete(params[:id])
   end
 
+  def create
+    item = Item.create(params[:item])
+    respond_with item
+  end
+
   private
 
   def select_attributes

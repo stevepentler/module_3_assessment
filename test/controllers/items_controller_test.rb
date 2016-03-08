@@ -16,6 +16,8 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     items = JSON.parse(response.body)
 
     assert_response :success
+    assert_equal 200, response.status
+
 
     assert_equal item1.name, items.first["name"]
     assert_equal item1.description, items.first["description"]
@@ -36,6 +38,8 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     result = JSON.parse(response.body)
 
     assert_response :success
+    assert_equal 200, response.status
+
 
     assert_equal item1.id, result["id"]
     assert_equal item1.name, result["name"]
@@ -53,6 +57,17 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_equal 204, response.status
+  end
 
+  test '#create' do 
+    params = {name: "banana", description: "yelllow", created_at: "5AM", updated_at: "5PM"}
+    post :create, format: :json, params: params
+
+    assert_response :success
+    assert_response 201, response.status
+
+    assert_equal item1.id, result["id"]
+    assert_equal item1.name, result["name"]
+    assert_equal item1.description, result["description"]
   end
 end
