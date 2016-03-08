@@ -3,16 +3,18 @@ class BestBuyService
               :params
 
   def initialize(params)
-    @client = Faraday.new("https://api.bestbuy.com/v1/") do |faraday|
+    @client = Faraday.new("http://api.bestbuy.com/v1/") do |faraday|
       faraday.adapter Faraday.default_adapter
     end
     @params = params
   end
 
   def get_products
-    response = client.get(client.get("products(longDescription=#{params})?apiKey=#{ENV['API_KEY']}"))
+    # response = client.get("products(longDescription=#{params})?show=sku,name&apiKey=#{ENV['API_KEY']}")
+    response = client.get("products(longDescription=#{params})?show=sku,name&pageSize=15&page=5&apiKey=#{ENV['API_KEY']}")
+    items = (response.body).to_json
     binding.pry
-    items = JSON.parse(response.body)
+    JSON.parse(items)
   end
 end
 
