@@ -11,7 +11,12 @@ class BestBuyService
 
   def get_products
     response = client.get("products(longDescription=#{params}*)?show=sku,name&pageSize=15&page=5&apiKey=nc676wsjs86rfzd62558j3cg&format=json")
-    items = (response.body)
+    products = JSON.parse(response.body)
+    products["products"]
+  end
+
+  def get_details
+    
   end
 end
 

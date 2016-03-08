@@ -1,5 +1,8 @@
 class SearchController < ApplicationController
+  respond_to :json
+ 
   def index
-    @items = BestBuyService.new(params[:name]).get_products
+    @service= BestBuyService.new(params[:name])
+    @items = @service.get_products
   end
 end
