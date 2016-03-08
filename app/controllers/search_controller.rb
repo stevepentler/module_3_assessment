@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
   def index
-    @items = Items.find_by(name: params[:name])
+    @items = BestBuyService.new(params[:name]).get_products
   end
 end
