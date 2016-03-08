@@ -14,7 +14,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.create(params[:item])
+    item = Item.new
+    item = Item.create(item_params)
     respond_with item
   end
 
@@ -22,5 +23,10 @@ class Api::V1::ItemsController < ApplicationController
 
   def select_attributes
     {except: [:updated_at, :created_at]}
+  end
+
+  def item_params
+    binding.pry
+    params.require(:item).permit(:name, :description, :updated_at, :created_at)
   end
 end
