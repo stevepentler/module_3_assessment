@@ -19,7 +19,7 @@ class DisplaysItemsTest < ActionDispatch::IntegrationTest
     visit '/'
     assert_equal 200, page.status_code
 
-    fill_in "item[name]", with: "sennheiser"
+    fill_in "name", with: "sennheiser"
     click_on "Search"
 
     assert_equal "/search", current_path
