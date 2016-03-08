@@ -15,7 +15,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
     item = Item.new
-    item = Item.create(item_params)
+    Item.create(item_params)
     respond_with item
   end
 
@@ -26,7 +26,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def item_params
-    binding.pry
     params.require(:item).permit(:name, :description, :updated_at, :created_at)
   end
 end
